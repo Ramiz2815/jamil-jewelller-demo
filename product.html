@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Product — Jamil Jewellers</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+      .product-page {
+        padding: 70px 0;
+      }
+
+      .product-detail {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 70px;
+        align-items: start;
+      }
+
+      /* IMAGE ZOOM */
+
+      .product-image-zoom {
+        width: 100%;
+        max-width: 480px;
+        height: 480px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+
+      .product-image-zoom img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+
+        transform: scale(1);
+        transform-origin: center center;
+
+        transition: transform 0.08s ease-out;
+      }
+
+      /* PRODUCT INFO */
+
+      .product-info {
+        padding-top: 15px;
+      }
+
+      .product-category {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold-deep);
+        margin-bottom: 12px;
+      }
+
+      .product-info h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 3.5rem;
+        font-weight: 500;
+        margin: 0 0 15px;
+      }
+
+      .product-price {
+        font-size: 1.1rem;
+        margin-bottom: 25px;
+      }
+
+      .product-description {
+        color: var(--charcoal-soft);
+        line-height: 1.8;
+        margin-bottom: 30px;
+      }
+
+      .product-details {
+        border-top: 1px solid var(--line);
+        margin-top: 30px;
+        padding-top: 20px;
+      }
+
+      .product-details p {
+        margin: 8px 0;
+        color: var(--charcoal-soft);
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 768px) {
+        .product-page {
+          padding: 40px 0;
+        }
+
+        .product-detail {
+          grid-template-columns: 1fr;
+          gap: 35px;
+        }
+
+        .product-info h1 {
+          font-size: 2.7rem;
+        }
+
+        .product-image-zoom {
+          cursor: default;
+        }
+      }
+
+      .back-products-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 25px;
+        padding: 10px 18px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--charcoal);
+        font-family: inherit;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.25s ease;
+      }
+
+      .back-products-btn:hover {
+        background: var(--charcoal);
+        color: white;
+        border-color: var(--charcoal);
+      }
+    </style>
+  </head>
+
+  <body data-page="jewellery">
+    <header>
+  <div class="wrap navrow">
+    <div class="logo">JAMIL JEWELLERS</div>
+    <nav class="main">
+      <a href="index.html" data-nav="home">Home</a>
+      <a href="jewellery.html" data-nav="jewellery">Jewellery</a>
+      <a href="index.html#collections" data-nav="collections">Collections</a>
+      <a href="about.html" data-nav="about">About Us</a>
+      <a href="contact.html" data-nav="contact">Contact</a>
+      <a href="Terms.html" data-nav="terms">Terms &amp; Conditions</a>
+    </nav>
+    <div class="icons">
+      <button aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg></button>
+      <button aria-label="Wishlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7.5-4.9-10-9.3C.6 8.6 2 5 5.6 5c2 0 3.3 1.1 4 2.2C10.3 6.1 11.6 5 13.6 5 17.2 5 18.6 8.6 22 11.7 14.5 16.1 12 21 12 21z"/></svg></button>
+      <button aria-label="Cart" onclick="openCart()" style="position:relative">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        <span id="cartCount">0</span>
+      </button>
+      <button class="hamb" aria-label="Menu" onclick="document.querySelector('nav.mobile').classList.toggle('show')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile" style="display:none; flex-direction:column; padding:8px 20px 20px; border-top:1px solid var(--line);">
+    <a style="padding:12px 0" href="index.html" data-nav="home">Home</a>
+    <a style="padding:12px 0" href="jewellery.html" data-nav="jewellery">Jewellery</a>
+    <a style="padding:12px 0" href="index.html#collections" data-nav="collections">Collections</a>
+    <a style="padding:12px 0" href="about.html" data-nav="about">About Us</a>
+    <a style="padding:12px 0" href="contact.html" data-nav="contact">Contact</a>
+    <a style="padding:12px 0" href="Terms.html" data-nav="terms">Terms &amp; Conditions</a>
+  </nav>
+</header>
+
+    <main class="product-page">
+      <div class="wrap">
+        <button class="back-products-btn" onclick="history.back()">
+          ← Back to Products
+        </button>
+
+        <div class="product-detail">
+          <!-- PRODUCT IMAGE -->
+
+          <div class="product-image-zoom" id="productZoom">
+            <img id="productImage" src="" alt="" />
+          </div>
+
+          <!-- PRODUCT INFORMATION -->
+
+          <div class="product-info">
+            <div class="product-category" id="productCategory"></div>
+
+            <h1 id="productName"></h1>
+
+            <div class="product-price" id="productPrice"></div>
+
+            <p class="product-description" id="productDescription"></p>
+
+            <button class="btn btn-solid" id="addProductBtn">
+              ADD TO CART
+            </button>
+
+            <div class="product-details">
+              <p>
+                <strong>Availability:</strong>
+                In stock — confirm at store
+              </p>
+
+              <p>
+                <strong>Material:</strong>
+                Confirm with Jamil Jewellers
+              </p>
+
+              <p>
+                <strong>Weight:</strong>
+                <span id="productWeight">—</span>
+              </p>
+
+              <p>
+                <strong>Care:</strong>
+                Store in a dry pouch, away from perfumes and moisture.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>© 2026 Jamil Jewellers, F-7 Markaz, Islamabad.</footer>
+
+    <a class="wa-float" target="_blank" rel="noopener" href="https://wa.me/923245725285?text=Hello%20Jamil%20Jewellers%2C%20I%20would%20like%20to%20enquire%20about%20your%20jewellery%20collection." aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16.6 2.7C8.9 2.7 2.7 8.9 2.7 16.6c0 2.6.7 5.1 2.1 7.3L2.7 29.3l5.6-1.9c2.1 1.2 4.5 1.8 7 1.8h.1c7.7 0 13.9-6.2 13.9-13.9S24.3 2.7 16.6 2.7zm0 25.2h-.1c-2.2 0-4.4-.6-6.2-1.7l-.4-.3-3.7 1.3 1.3-3.5-.3-.4c-1.2-1.9-1.9-4.1-1.9-6.4 0-6.6 5.4-12 12.1-12s12.1 5.4 12.1 12-5.4 12-12.1 12zm6.7-8.9c-.4-.2-2.1-1.1-2.5-1.2-.3-.1-.6-.2-.8.2-.2.3-.9 1.2-1.1 1.4-.2.2-.4.3-.7.1-.4-.2-1.5-.6-2.9-1.8-1.1-1-1.8-2.1-2-2.5-.2-.3 0-.5.1-.7.2-.2.4-.4.6-.7.2-.2.3-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.9 5.1.8.3 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 2.1-.8 2.4-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.4z"/></svg>
+</a>
+
+<div class="overlay" id="overlay" onclick="closeCart(); closeQuickView();"></div>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Your Bag</h3>
+    <button class="drawer-close" onclick="closeCart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg></button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="subtotal-row"><span>Subtotal</span><strong id="subtotalVal">Rs. 0</strong></div>
+    <a class="btn btn-solid" href="contact.html" onclick="closeCart()">PROCEED TO ENQUIRY</a>
+    <p style="text-align:center; margin-top:10px; font-size:.75rem; color:var(--charcoal-soft);">Checkout isn't connected yet — send us an enquiry and our team will confirm your order.</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="jewel" id="modalImg"></div>
+    <div class="modal-body">
+      <button class="modal-close" onclick="closeQuickView()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg></button>
+      <div class="cat" id="modalCat"></div>
+      <h2 id="modalName"></h2>
+      <div class="price" id="modalPrice"></div>
+      <p class="desc">Placeholder description pending details from Jamil Jewellers. Material, weight and certification will be confirmed in-store.</p>
+      <p class="modal-detail"><strong>Availability:</strong> In stock — confirm at store</p>
+      <p class="modal-detail"><strong>Care:</strong> Store in a dry pouch, away from perfumes and moisture.</p>
+      <button class="btn btn-solid" style="margin-top:16px;" onclick="addFromModal()">ADD TO CART</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+    <script src="product.js"></script>
+    <script>
+      (function () {
+        const id = new URLSearchParams(window.location.search).get("id");
+        const el = document.getElementById("productWeight");
+        if (el && id && typeof getWeightById === "function") {
+          el.textContent = getWeightById(id);
+        }
+      })();
+    </script>
+  </body>
+</html>
